@@ -1,0 +1,32 @@
+version: 2
+
+macros:
+  - name: get_has_condition_feature_to_measure
+    description: |
+      Returns a hash of conditions to be added as features in the dataset.
+      
+      Input: None 
+
+      Output: A dictionary of conditions names and their respective measurement value as seen in source data.
+  
+  - name: get_adherent_to_feature_to_measure
+    description: |
+      Returns a hash of conditions that require medical treatment. The values of the dictionary should be the measurement names from the source.
+      
+      Input: None 
+
+      Output: A dictionary of adherence-type measurement names from source data.
+
+  - name: last_few_statuses
+    arguments: 
+      - name: count
+        description: the number of status records to return
+        type: int
+    description: |
+      Get last few status records for each patient & measurement for trend analysis. 
+
+      Built as a macro in case multiple analyses are required (e.g. time gap between statuses, scoring over short and long time periods, etc.)
+      
+      Input: count (INT), representing the number of statuses to retrtieve for each group.
+      
+      Output: the corresponding SQL select statement

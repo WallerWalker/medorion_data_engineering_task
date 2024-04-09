@@ -1,7 +1,13 @@
 {{ config(materialized='table') }}
 
-SELECT member_id,
-       gender,
-       DATE_DIFF(CURRENT_DATE, date_of_birth, YEAR)
-           + IF(EXTRACT(DAYOFYEAR FROM CURRENT_DATE) < EXTRACT(DAYOFYEAR FROM date_of_birth), -1, 0) as age
-FROM {{ source ('raw_data', 'members') }}
+SELECT 
+     M.member_id
+    ,M.gender
+    ,DATE_DIFF(CURRENT_DATE, M.date_of_birth, YEAR)
+        + IF(
+            EXTRACT(DAYOFYEAR FROM CURRENT_DATE) < EXTRACT(DAYOFYEAR FROM M.date_of_birth), 
+            -1, 
+            0
+          )                                                                           AS `age`
+
+FROM {{ source ('raw_data', 'members') }}       AS M                                                                        -- Members

@@ -1,0 +1,25 @@
+version: 2
+
+models:
+  - name: all_features
+    description: combines all member-related queries into one dataset. Designed for ML processes.
+    columns:
+      - name: member_id
+        tests:
+          - unique
+          - not_null
+
+  - name: adherent_to
+    description: shows for each patient whether they adhere to the prescribed treatment.
+
+  - name: condition_medication_trend
+    description: shows for each combination of patient and medicinal treatment whether the patient is becoming more or less adherent.
+
+  - name: has_condition
+    description: shows for each patient what medical conditions they have been diagnosed with.
+
+  - name: members_features
+    description: basic info about the patient.
+
+  - name: number_of_medical_conditions
+    description: counts the number of medical conditions each patient was diagnosed with.
